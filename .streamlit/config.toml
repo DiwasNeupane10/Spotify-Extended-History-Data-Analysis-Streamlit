@@ -1,0 +1,19 @@
+[theme]
+# Primary accent color (used in buttons, sliders, active elements)
+backgroundColor = "#121212"        # Spotify green
+
+# Background color of the main page
+primaryColor = "#1DB954"     # Dark gray
+
+# Sidebar background
+secondaryBackgroundColor = "#181818"   # Slightly lighter dark
+
+# Text color
+textColor = "#1DB954"          # White
+
+# Font: "sans serif", "serif", or "monospace"
+font = "sans serif"
+
+# Optionally, you can choose a base wide layout for dashboards
+[server]
+headless = true
