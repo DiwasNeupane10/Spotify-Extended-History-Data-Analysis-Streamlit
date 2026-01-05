@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
+import plotly.graph_objects as go
 @st.cache_data
 def return_data() ->pd.DataFrame :
     plot_data=pd.read_parquet('D:/spotify project/dashboard/data/df_plot_data.parquet')
@@ -64,3 +66,33 @@ def year_filter(year:str,allyear_df:pd.DataFrame)->pd.DataFrame:
     # print(allyear_df.year.value_counts())
     filtered_df=allyear_df[allyear_df['year'] ==str(year)]
     return filtered_df
+
+def list_chart(df):
+    df21=year_filter('2021',df)
+    df22=year_filter('2022',df)
+    df23=year_filter('2023',df)
+    df24=year_filter('2024',df)
+    df25=year_filter('2025',df)
+
+    labels=['2021','2022','2023','2024','2025']
+    data=[int(np.ceil(df21['ms_played_sum'].sum()/60000)),int(np.ceil(df22['ms_played_sum'].sum()/60000)),int(np.ceil(df23['ms_played_sum'].sum()/60000)),int(np.ceil(df24['ms_played_sum'].sum()/60000)),int(np.ceil(df25['ms_played_sum'].sum()/60000))]
+
+    fig = go.Figure()
+
+    fig.add_trace(
+        go.Scatter(
+            x=labels,
+            y=data,
+            mode="lines+markers",
+            marker=dict(size=10, symbol="circle"),
+            line=dict(width=2,color='green'),
+            marker_color=['red','orange','blue','green','yellow']
+        )
+    )
+
+    fig.update_layout(
+        xaxis_title="Year",
+        yaxis_title="Total Minutes Played",
+        # template="plotly_white"
+    )
+    return fig

@@ -10,12 +10,8 @@ st.set_page_config(
     layout='wide',
     page_icon='🎧'
 )
-st.header("SPOTIFY EXTENDED HISTORY DATA ANALYSIS",text_alignment='center')
-subheadercol1,subheadercol2=st.columns(2)
-with subheadercol1:
-    st.subheader("Name: Diwas Neupane",text_alignment='center')
-with subheadercol2:
-    st.subheader("Time Range: 2021-2025",text_alignment='center')
+
+
 
 #Row1
 plot_data,_=return_data()
