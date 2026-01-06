@@ -2,21 +2,28 @@
 import streamlit as st
 import pandas as pd
 from utils import return_data,list_chart
+st.set_page_config(
+    page_title="ABOUT",
+    layout='wide',
+    page_icon='🎧'
+)
 st.title("SPOTIFY EXTENDED HISTORY DATA ANALYSIS",text_alignment='center')
-st.sidebar.header("app")
+st.sidebar.text("🎵 A visual analysis of my Spotify Extended Streaming History, highlighting trends, favorites, and listening behavior over time.")
 _,df=return_data()
-total_ms=df['ms_played_sum'].sum()
-total_seconds = total_ms / 1000
-print(total_seconds)
-# Compute days, hours, minutes, seconds
-days = int(total_seconds // 86400)
-hours = int((total_seconds % 86400) // 3600)
-minutes = int((total_seconds % 3600) // 60)
-seconds = int(total_seconds % 60)
+def convert_time(df:pd.DataFrame)->str:
+    total_ms=df['ms_played_sum'].sum()
+    total_seconds = total_ms / 1000
+    # print(total_seconds)
+    # Compute days, hours, minutes, seconds
+    days = int(total_seconds // 86400)
+    hours = int((total_seconds % 86400) // 3600)
+    minutes = int((total_seconds % 3600) // 60)
+    seconds = int(total_seconds % 60)
 
-# Format as "Xd Xh Xm Xs"
-total_listening_time = f"{days}d {hours}h {minutes}m {seconds}s"
-
+    # Format as "Xd Xh Xm Xs"
+    total_listening_time = f"{days}d {hours}h {minutes}m {seconds}s"
+    return total_listening_time
+total_listening_time=convert_time(df)
 kpi=st.container(border=True,width='stretch',height='content')
 kpi_info = pd.DataFrame([{
     "Name": "Diwas Neupane",
@@ -24,10 +31,6 @@ kpi_info = pd.DataFrame([{
     "Total Listening Duration":total_listening_time
 }])
 
-
-# with kpi:
-#     st.subheader("KPI",text_alignment='center')
-#     st.dataframe(kpi_info,hide_index=True)  
 
 with kpi :
     row1=st.container(border=True,width='stretch',height='content')

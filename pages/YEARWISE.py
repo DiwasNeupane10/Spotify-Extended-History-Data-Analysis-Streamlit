@@ -3,7 +3,12 @@ from utils import year_filter,ret_toptrack,return_data,agg_pie
 import plotly.express as px
 from plotly.express.colors import sequential as sq
 st.header("Yearwise Filter For Drilled Down Insights")
-st.set_page_config(layout='wide')
+st.set_page_config(
+    page_title="YearWise",
+    layout='wide',
+    page_icon='🎧'
+)
+st.sidebar.text('Select a year to drill down into artist, album, and track-level insights.')
 input_container=st.container()
 with input_container:
     year=st.selectbox("Select a year",[2021,2022,2023,2024,2025])

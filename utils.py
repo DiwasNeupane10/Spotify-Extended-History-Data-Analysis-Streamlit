@@ -2,10 +2,14 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
+from pathlib import Path
+BASE_DIR=Path(__file__).parent
+# print(BASE_DIR)
 @st.cache_data
 def return_data() ->pd.DataFrame :
-    plot_data=pd.read_parquet('D:/spotify project/dashboard/data/df_plot_data.parquet')
-    all_yeardf=pd.read_parquet('D:/spotify project/dashboard/data/df_streamliit.parquet')
+    plot_data=pd.read_parquet(f'{BASE_DIR}/data/df_plot_data.parquet')
+    all_yeardf=pd.read_parquet(f'{BASE_DIR}/data/df_streamliit.parquet')
+    
     return plot_data,all_yeardf
 
 def ret_toptrack(casse:str,data:pd.DataFrame) -> pd.DataFrame:
@@ -84,9 +88,9 @@ def list_chart(df):
             x=labels,
             y=data,
             mode="lines+markers",
-            marker=dict(size=10, symbol="circle"),
+            marker=dict(size=10, symbol=["circle",'pentagon','hexagon','triangle-up-dot','diamond']),
             line=dict(width=2,color='green'),
-            marker_color=['red','orange','blue','green','yellow']
+            marker_color=['red','orange','blue','purple','yellow']
         )
     )
 

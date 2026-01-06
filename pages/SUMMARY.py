@@ -6,12 +6,12 @@ import pandas as pandas
 from plotly.express.colors import sequential as sq
 from utils import return_data,ret_toptrack,agg_pie
 st.set_page_config(
-    page_title="Dashboard",
+    page_title="SUMMARY",
     layout='wide',
     page_icon='🎧'
 )
-
-
+st.sidebar.text('This section provides an overall summary of listening activity across the entire time period.')
+st.header("Overall Summary ",text_alignment='center')
 
 #Row1
 plot_data,_=return_data()
