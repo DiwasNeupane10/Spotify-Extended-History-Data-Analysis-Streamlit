@@ -42,7 +42,7 @@ The application is designed to be **interactive**, **intuitive**, and **insight-
 * **Python**
 * **Streamlit** – Web app framework
 * **Pandas** – Data manipulation
-* **Plotly ** – Data visualization
+* **Plotly** – Data visualization
 
 ---
 
@@ -114,10 +114,10 @@ spotify-extended-history-analysis/
 
 ## 🔮 Future Improvements
 
-* Genre-level analysis(** lack of numerical data **)
+* Genre-level analysis(**lack of numerical data**)
 * Monthly & seasonal trends
-* Recommendation insights based on listening patterns(** lack of numerical data **)
-* Vision / AI model integration for automated insight generation(** Was Compute Intensive and scratched the idea**)
+* Recommendation insights based on listening patterns(**lack of numerical data**)
+* Vision / AI model integration for automated insight generation(**Was Compute Intensive and scratched the idea**)
 * Can allow people to gen insghts based on their own data.
 
 ---
