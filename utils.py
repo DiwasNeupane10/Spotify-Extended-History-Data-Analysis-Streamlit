@@ -17,11 +17,11 @@ def ret_toptrack(casse:str,data:pd.DataFrame) -> pd.DataFrame:
         case '1':
             data['total_minutes_played'] =data['ms_played_sum'] / (60000)
             top_tracks = data.sort_values(by='total_minutes_played', ascending=False).head(10)
-            print(top_tracks)
+            # print(top_tracks)
             return top_tracks
         case '2':
             top_tracks = data.sort_values(by='track_frequency', ascending=False).head(10)
-            print(top_tracks)
+            # print(top_tracks)
             return top_tracks
     
 def agg_pie(casse:str,plot_data:pd.DataFrame)->pd.DataFrame:
