@@ -12,6 +12,23 @@ def return_data() ->pd.DataFrame :
     all_yeardf=pd.read_parquet(f'{BASE_DIR}/data/df_streamliit.parquet')
     
     return plot_data,all_yeardf
+@st.cache_data
+def genre_df()->pd.DataFrame:
+    return pd.read_parquet(f'{BASE_DIR}/data/df_plot_data1.parquet')
+
+def ret_genre(casse:str,data:pd.DataFrame)->pd.DataFrame:
+    match casse:
+        case '1':
+            data['total_minutes_played'] =data['ms_played_sum'] / (60000)
+            g_data=data.groupby(['genre']).agg(freq=('genre','count'),total_minutes_played=('ms_played_sum','sum')).reset_index()
+            top_genre = g_data.sort_values(by='total_minutes_played', ascending=False).head(10)
+            # print(top_tracks)
+            return top_genre
+        case '2':
+            g_data=data.groupby(['genre']).agg(genre_frequency=('genre','count')).reset_index()
+            top_genre = g_data.sort_values(by='genre_frequency', ascending=False).head(10)
+            # print(top_tracks)
+            return top_genre
 
 def ret_toptrack(casse:str,data:pd.DataFrame) -> pd.DataFrame:
     match casse:
@@ -101,6 +118,5 @@ def list_chart(df):
         # template="plotly_white"
     )
     return fig
-
 
 

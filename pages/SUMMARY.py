@@ -4,7 +4,7 @@ import os
 import numpy as numpy
 import pandas as pandas
 from plotly.express.colors import sequential as sq
-from utils import return_data,ret_toptrack,agg_pie
+from utils import return_data,ret_toptrack,agg_pie,genre_df,ret_genre
 st.set_page_config(
     page_title="SUMMARY",
     layout='wide',
@@ -52,3 +52,20 @@ with chart6_col:
     fig5 = px.sunburst(agg_pie('4',plot_data), path=['master_metadata_album_artist_name','master_metadata_album_album_name','master_metadata_track_name'], values='total_minutes_played',color_discrete_sequence=sq.Greens_r)
     st.plotly_chart(fig5,width='content',key='fig6')
 
+#Row4
+plot1_data=genre_df()
+
+chart7_col,chart8_col=st.columns(2,border=True,width='stretch')
+with chart7_col:
+    st.subheader("Top 10 Genre: Minutes Played",text_alignment="center")
+    top_genre_df=ret_genre('1',plot1_data)
+    fig7=px.bar(top_genre_df,y='genre',x='total_minutes_played',color='genre',color_discrete_sequence=sq.Greens_r)
+    fig7.update_layout(legend_title_text=None)
+    st.plotly_chart(fig7,width='content',key='fig7')
+with chart8_col:    
+
+    st.subheader("Top 10 Genre: Frequency",text_alignment="center")
+    top_genre_df=ret_genre('2',plot1_data)
+    fig8=px.bar(top_genre_df,y='genre',x='genre_frequency',color='genre',color_discrete_sequence=sq.Greens_r)
+    fig8.update_layout(legend_title_text=None)
+    st.plotly_chart(fig8,width='content',key='fig8')

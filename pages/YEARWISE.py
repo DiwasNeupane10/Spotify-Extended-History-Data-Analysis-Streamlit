@@ -1,5 +1,5 @@
 import streamlit as st
-from utils import year_filter,ret_toptrack,return_data,agg_pie
+from utils import year_filter,ret_toptrack,return_data,agg_pie,ret_genre,genre_df
 import plotly.express as px
 from plotly.express.colors import sequential as sq
 st.header("Yearwise Filter For Drilled Down Insights")
@@ -14,6 +14,7 @@ with input_container:
     year=st.selectbox("Select a year",[2021,2022,2023,2024,2025])
     flag=st.button("Generate Insights")
 _,all_yeardf=return_data()
+plot1_data=genre_df()
 # print(all_yeardf.head(5))
 if flag:
     filtered_df=year_filter(year,all_yeardf)
@@ -58,3 +59,17 @@ if flag:
         fig5 = px.sunburst(agg_pie('4',filtered_df
 ), path=['master_metadata_album_artist_name','master_metadata_album_album_name','master_metadata_track_name'], values='total_minutes_played',color_discrete_sequence=sq.Greens_r)
         st.plotly_chart(fig5,width='content',key='fig6')
+    chart7_col,chart8_col=st.columns(2,border=True,width='stretch')
+    with chart7_col:
+        st.subheader("Top 10 Genre: Minutes Played",text_alignment="center")
+        top_genre_df=ret_genre('1',plot1_data)
+        fig7=px.bar(top_genre_df,y='genre',x='total_minutes_played',color='genre',color_discrete_sequence=sq.Greens_r)
+        fig7.update_layout(legend_title_text=None)
+        st.plotly_chart(fig7,width='content',key='fig7')
+    with chart8_col:    
+
+        st.subheader("Top 10 Genre: Frequency",text_alignment="center")
+        top_genre_df=ret_genre('2',plot1_data)
+        fig8=px.bar(top_genre_df,y='genre',x='genre_frequency',color='genre',color_discrete_sequence=sq.Greens_r)
+        fig8.update_layout(legend_title_text=None)
+        st.plotly_chart(fig8,width='content',key='fig8')
