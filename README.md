@@ -4,6 +4,8 @@ A data analysis and visualization project built using **Python** and **Streamlit
 ⚠️ Jupyter notebook maybe uploaded in the future but depends on my mood.
 
 ---
+## Check it out
+[Streamlit App](https://spotify-extended-history-data-analysis-app-8dcusfzpqfmcnhw8smz.streamlit.app/)
 
 ## 📌 Project Overview
 
@@ -17,6 +19,7 @@ Spotify Extended Streaming History offers a detailed record of your listening ac
 The application is designed to be **interactive**, **intuitive**, and **insight-driven**.
 
 ---
+
 
 ## 🚀 Features
 
