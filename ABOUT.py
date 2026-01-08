@@ -1,7 +1,7 @@
 
 import streamlit as st
 import pandas as pd
-from utils import return_data,list_chart
+from utils import return_data,list_chart,genre_df
 st.set_page_config(
     page_title="ABOUT",
     layout='wide',
@@ -10,6 +10,7 @@ st.set_page_config(
 st.title("SPOTIFY EXTENDED HISTORY DATA ANALYSIS",text_alignment='center')
 st.sidebar.text("🎵 A visual analysis of my Spotify Extended Streaming History, highlighting trends, favorites, and listening behavior over time.")
 _,df=return_data()
+genredf=genre_df()
 def convert_time(df:pd.DataFrame)->str:
     total_ms=df['ms_played_sum'].sum()
     total_seconds = total_ms / 1000
@@ -33,6 +34,12 @@ kpi_info = pd.DataFrame([{
 
 
 with kpi :
+    row4=st.container(border=True,width='stretch',height='content')
+    with row4:
+        st.subheader("Total Listening Line Plot Across Time Period",text_alignment='center')
+    row5=st.container(border=True,width='stretch',height='content')
+    with row5:
+        st.plotly_chart(list_chart(df))
     row1=st.container(border=True,width='stretch',height='content')
     with row1:
         col1,col2,col3=st.columns(3,width='stretch')
@@ -60,10 +67,35 @@ with kpi :
             st.subheader(":",text_alignment='justify')
         with col9:
             st.subheader(total_listening_time,text_alignment='justify')
-    row4=st.container(border=True,width='stretch',height='content')
-    with row4:
-        st.subheader("Total Listening Line Plot Across Time Period",text_alignment='center')
-    row5=st.container(border=True,width='stretch',height='content')
-    with row5:
-        st.plotly_chart(list_chart(df))
-
+    row6=st.container(border=True,width='stretch',height='content')
+    with row6:
+        artists=df['master_metadata_album_artist_name'].nunique()
+        col10,col11,col12=st.columns(3,width='stretch')
+        with col10:
+            st.subheader("Total Artists Listened ",text_alignment='justify')
+        with col11:
+            st.subheader(":",text_alignment='justify')
+        with col12:
+            st.subheader(artists,text_alignment='justify')
+    row7=st.container(border=True,width='stretch',height='content')
+    with row7:
+        songs=df['master_metadata_track_name'].nunique()
+        col13,col14,col15=st.columns(3,width='stretch')
+        with col13:
+            st.subheader("Total Songs Played ",text_alignment='justify')
+        with col14:
+            st.subheader(":",text_alignment='justify')
+        with col15:
+            st.subheader(songs,text_alignment='justify')
+    row8=st.container(border=True,width='stretch',height='content')
+    with row8:
+        songs=genredf['genre'].nunique()
+        col16,col17,col18=st.columns(3,width='stretch')
+        with col16:
+            st.subheader("Total Genres Played ",text_alignment='justify')
+        with col17:
+            st.subheader(":",text_alignment='justify')
+        with col18:
+            st.subheader(songs,text_alignment='justify')
+    
+    
