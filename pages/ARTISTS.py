@@ -41,7 +41,7 @@ if flag:
     chart3_col,chart4_col=st.columns(2,border=True,width='stretch')
     with chart3_col:
         pass
-        data,labels=ret_ms_played_yearly(df)
+        data,labels=ret_ms_played_yearly(filtered_df)
         bar_df=pd.DataFrame({
             "Year":labels,
             "Total Minutes Played":data
