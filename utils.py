@@ -90,15 +90,8 @@ def year_filter(year:str,allyear_df:pd.DataFrame)->pd.DataFrame:
     return filtered_df
 
 def list_chart(df):
-    df21=year_filter('2021',df)
-    df22=year_filter('2022',df)
-    df23=year_filter('2023',df)
-    df24=year_filter('2024',df)
-    df25=year_filter('2025',df)
 
-    labels=['2021','2022','2023','2024','2025']
-    data=[int(np.ceil(df21['ms_played_sum'].sum()/60000)),int(np.ceil(df22['ms_played_sum'].sum()/60000)),int(np.ceil(df23['ms_played_sum'].sum()/60000)),int(np.ceil(df24['ms_played_sum'].sum()/60000)),int(np.ceil(df25['ms_played_sum'].sum()/60000))]
-
+    data,labels=ret_ms_played_yearly(df)
     fig = go.Figure()
 
     fig.add_trace(
@@ -116,7 +109,23 @@ def list_chart(df):
         xaxis_title="Year",
         yaxis_title="Total Minutes Played",
         # template="plotly_white"
+        
     )
+
     return fig
 
 
+def artist_filter(artist:str,df:pd.DataFrame)->pd.DataFrame:
+    return df[df['master_metadata_album_artist_name']==str(artist)]
+
+
+def ret_ms_played_yearly(df:pd.DataFrame)->tuple:
+    df21=year_filter('2021',df)
+    df22=year_filter('2022',df)
+    df23=year_filter('2023',df)
+    df24=year_filter('2024',df)
+    df25=year_filter('2025',df)
+
+    labels=['2021','2022','2023','2024','2025']
+    data=[int(np.ceil(df21['ms_played_sum'].sum()/60000)),int(np.ceil(df22['ms_played_sum'].sum()/60000)),int(np.ceil(df23['ms_played_sum'].sum()/60000)),int(np.ceil(df24['ms_played_sum'].sum()/60000)),int(np.ceil(df25['ms_played_sum'].sum()/60000))]
+    return data,labels

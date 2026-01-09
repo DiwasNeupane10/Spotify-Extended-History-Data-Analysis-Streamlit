@@ -14,6 +14,6 @@ textColor = "#1DB954"          # White
 # Font: "sans serif", "serif", or "monospace"
 font = "sans serif"
 
-# Optionally, you can choose a base wide layout for dashboards
+
 [server]
 headless = true
